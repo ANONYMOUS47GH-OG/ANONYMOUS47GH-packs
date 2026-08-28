@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="https://cloudflare.com">
     <style>
         :root {
-            --bg-deep: #050811;
-            --bg-surface: #0e1626;
+            --bg-deep: #03060f;
+            --bg-surface: #0a101d;
             --blue-glow: #38bdf8;
             --blue-accent: #0284c7;
             --text-primary: #f8fafc;
@@ -29,19 +29,35 @@
             color: var(--text-primary);
             overflow-x: hidden;
             min-height: 100vh;
+            position: relative;
         }
 
-        /* Sleek Stealth Header */
+        /* Interactive Canvas Setup */
+        #pvpCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Placing layout content securely over canvas physics overlay */
+        header, section, main, .modal {
+            position: relative;
+            z-index: 2;
+        }
+
         header {
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 25px 50px;
-            background: rgba(5, 8, 17, 0.75);
-            border-bottom: 1px solid rgba(56, 189, 248, 0.08);
+            background: rgba(3, 6, 15, 0.7);
+            border-bottom: 1px solid rgba(56, 189, 248, 0.05);
             position: sticky;
             top: 0;
-            z-index: 100;
             backdrop-filter: blur(12px);
         }
 
@@ -53,15 +69,10 @@
             text-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
         }
 
-        .logo span {
-            color: var(--blue-glow);
-        }
-
-        /* Engaging Premium Hero Screen */
         .hero {
             text-align: center;
             padding: 100px 20px 60px 20px;
-            background: radial-gradient(circle at top, rgba(2, 132, 199, 0.15) 0%, rgba(5, 8, 17, 1) 60%);
+            background: radial-gradient(circle at top, rgba(2, 132, 199, 0.12) 0%, rgba(3, 6, 15, 0) 70%);
         }
 
         .hero h1 {
@@ -70,13 +81,11 @@
             letter-spacing: 2px;
             text-transform: uppercase;
             font-weight: 900;
-            cursor: default;
         }
 
-        /* Trigger Text Styling */
         .trigger-text {
             color: var(--blue-glow);
-            transition: text-shadow 0.3s;
+            cursor: default;
         }
 
         .hero p {
@@ -87,7 +96,6 @@
             line-height: 1.6;
         }
 
-        /* Core Catalog Display Layout */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -101,12 +109,13 @@
         }
 
         .pack-card {
-            background: var(--bg-surface);
+            background: rgba(10, 16, 29, 0.85);
             border-radius: 16px;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.03);
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, box-shadow 0.3s;
             position: relative;
+            backdrop-filter: blur(8px);
         }
 
         .pack-card:hover {
@@ -123,9 +132,7 @@
             border-bottom: 1px solid rgba(56, 189, 248, 0.1);
         }
 
-        .pack-info {
-            padding: 25px;
-        }
+        .pack-info { padding: 25px; }
 
         .pack-badge {
             position: absolute;
@@ -139,23 +146,10 @@
             font-size: 0.75rem;
             border-radius: 20px;
             text-transform: uppercase;
-            backdrop-filter: blur(4px);
         }
 
-        .pack-title {
-            font-size: 1.4rem;
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-
-        .pack-desc {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 22px;
-            height: 48px;
-            overflow: hidden;
-        }
+        .pack-title { font-size: 1.4rem; margin-bottom: 8px; font-weight: 700; }
+        .pack-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 22px; height: 48px; overflow: hidden; }
 
         .download-btn {
             display: flex;
@@ -182,135 +176,54 @@
         }
 
         .delete-btn {
-            background: transparent;
-            color: var(--danger);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            padding: 10px;
-            border-radius: 8px;
-            margin-top: 15px;
-            cursor: pointer;
-            width: 100%;
-            font-weight: 600;
-            font-size: 0.85rem;
-            display: none;
-            transition: all 0.2s;
+            background: transparent; color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 10px; border-radius: 8px; margin-top: 15px; cursor: pointer; width: 100%;
+            font-weight: 600; font-size: 0.85rem; display: none; transition: all 0.2s;
         }
 
-        .delete-btn:hover {
-            background: var(--danger);
-            color: white;
-        }
+        .delete-btn:hover { background: var(--danger); color: white; }
 
-        /* Secret Modal UI Overlays */
+        /* Hidden Dashboard Portal Styles */
         .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(3, 7, 18, 0.92);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(8px);
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(3, 7, 18, 0.94); justify-content: center; align-items: center; backdrop-filter: blur(8px);
         }
 
         .modal-content {
-            background: var(--bg-surface);
-            padding: 40px;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 480px;
-            border: 1px solid rgba(56, 189, 248, 0.15);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            position: relative;
+            background: var(--bg-surface); padding: 40px; border-radius: 20px; width: 90%; max-width: 480px;
+            border: 1px solid rgba(56, 189, 248, 0.15); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); position: relative;
         }
 
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 1.3rem;
-            cursor: pointer;
-            color: var(--text-secondary);
-            transition: color 0.2s;
-        }
-
-        .close-modal:hover { color: white; }
-
+        .close-modal { position: absolute; top: 20px; right: 20px; font-size: 1.3rem; cursor: pointer; color: var(--text-secondary); }
         .form-group { margin-bottom: 22px; }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 14px;
-            background: var(--bg-deep);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            color: white;
-            border-radius: 10px;
-            outline: none;
-            font-size: 0.95rem;
-            transition: border-color 0.2s;
-        }
-
-        .form-group input:focus, .form-group textarea:focus {
-            border-color: var(--blue-glow);
-        }
-
-        .submit-btn {
-            width: 100%;
-            background: var(--blue-accent);
-            color: white;
-            padding: 14px;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
+        .form-group label { display: block; margin-bottom: 8px; font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; }
+        .form-group input, .form-group textarea { width: 100%; padding: 14px; background: var(--bg-deep); border: 1px solid rgba(255, 255, 255, 0.05); color: white; border-radius: 10px; outline: none; }
+        .form-group input:focus, .form-group textarea:focus { border-color: var(--blue-glow); }
+        .submit-btn { width: 100%; background: var(--blue-accent); color: white; padding: 14px; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; }
         .submit-btn:hover { background: var(--blue-glow); }
 
         .empty-state {
-            text-align: center;
-            grid-column: 1 / -1;
-            padding: 80px 20px;
-            color: var(--text-secondary);
-            border: 2px dashed rgba(56, 189, 248, 0.05);
-            border-radius: 20px;
+            text-align: center; grid-column: 1 / -1; padding: 80px 20px; color: var(--text-secondary);
+            border: 2px dashed rgba(56, 189, 248, 0.05); border-radius: 20px; background: rgba(10, 16, 29, 0.4);
         }
-
-        .empty-state i {
-            font-size: 3.5rem;
-            margin-bottom: 18px;
-            color: rgba(56, 189, 248, 0.1);
-        }
+        .empty-state i { font-size: 3.5rem; margin-bottom: 18px; color: rgba(56, 189, 248, 0.08); }
     </style>
 </head>
 <body>
+
+    <!-- CPvP Repulsion Canvas -->
+    <canvas id="pvpCanvas"></canvas>
 
     <header>
         <div class="logo">ANONYMOUSGH47</div>
     </header>
 
     <section class="hero">
-        <!-- Double click the span element below to access your admin login window -->
         <h1>TEXTURE <span class="trigger-text" ondblclick="openAdminModal()">PACKS</span></h1>
         <p>A completely ad-free, high-performance vault hosting verified Minecraft optimization resources and custom client graphical overlays.</p>
     </section>
 
-<main>
+   <main>
     <main class="container">
     <div class="pack-grid" id="packGrid">
         <div style="background: var(--card-bg, #111827); padding: 24px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.05); text-align: center;">
@@ -321,20 +234,33 @@
     </div>
     </main>
     </main>
+
     <!-- Invisible Lockbox Panel Interface -->
     <div class="modal" id="adminModal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeAdminModal()">&times;</span>
-            
-            <!-- Guard Interface -->
             <div id="authSection" style="text-align: center;">
-                <h2 style="margin-bottom: 10px; font-weight: 700;">System Access</h2>
+                <h2 style="margin-bottom: 10px;">System Access</h2>
                 <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 25px;">Enter validation passkey to modify resource index.</p>
-                <div class="form-group">
-                    <input type="password" id="passkeyInput" placeholder="Passkey">
-                </div>
+                <div class="form-group"><input type="password" id="passkeyInput" placeholder="Passkey"></div>
                 <button class="submit-btn" onclick="verifyAdmin()">Unlock</button>
             </div>
-
-            <!-- Terminal Studio Upload Form -->
             <div id="uploadSection" style="display: none;">
+                <h2 style="margin-bottom: 20px; color: var(--blue-glow);">Management Console</h2>
+                <div class="form-group"><label>Pack Title</label><input type="text" id="packTitle"></div>
+                <div class="form-group"><label>Resolution Badge</label><input type="text" id="packResolution"></div>
+                <div class="form-group"><label>Short Description</label><textarea id="packDesc" rows="3"></textarea></div>
+                <div class="form-group"><label>Direct Download Link URL</label><input type="url" id="packLink"></div>
+                <div class="form-group"><label>Showcase Image URL</label><input type="url" id="packImage"></div>
+                <button class="submit-btn" onclick="addNewPack()">Publish Asset</button>
+                <button class="submit-btn" onclick="logoutAdmin()" style="background: transparent; color: var(--danger); border: 1px solid var(--danger); margin-top: 12px;">Lock Session</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. CPvP Interactive Background Canvas System ---
+        const canvas = document.getElementById('pvpCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let pvpItems = [];
