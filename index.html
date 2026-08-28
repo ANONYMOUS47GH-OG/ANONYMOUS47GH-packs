@@ -32,21 +32,20 @@
             position: relative;
         }
 
-        /* Interactive Canvas Setup */
+        /* Fixed Background Interaction Canvas Layer */
         #pvpCanvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1;
+            z-index: 0;
             pointer-events: none;
         }
 
-        /* Placing layout content securely over canvas physics overlay */
         header, section, main, .modal {
             position: relative;
-            z-index: 2;
+            z-index: 1;
         }
 
         header {
@@ -54,7 +53,7 @@
             justify-content: center;
             align-items: center;
             padding: 25px 50px;
-            background: rgba(3, 6, 15, 0.7);
+            background: rgba(3, 6, 15, 0.75);
             border-bottom: 1px solid rgba(56, 189, 248, 0.05);
             position: sticky;
             top: 0;
@@ -66,13 +65,13 @@
             font-size: 1.6rem;
             letter-spacing: 3px;
             text-transform: uppercase;
-            text-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
         }
 
         .hero {
             text-align: center;
             padding: 100px 20px 60px 20px;
-            background: radial-gradient(circle at top, rgba(2, 132, 199, 0.12) 0%, rgba(3, 6, 15, 0) 70%);
+            background: radial-gradient(circle at top, rgba(2, 132, 199, 0.15) 0%, rgba(3, 6, 15, 0) 70%);
         }
 
         .hero h1 {
@@ -183,7 +182,7 @@
 
         .delete-btn:hover { background: var(--danger); color: white; }
 
-        /* Hidden Dashboard Portal Styles */
+        /* Hidden Panel Layout Overlays */
         .modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(3, 7, 18, 0.94); justify-content: center; align-items: center; backdrop-filter: blur(8px);
@@ -211,7 +210,7 @@
 </head>
 <body>
 
-    <!-- CPvP Repulsion Canvas -->
+    <!-- Repulsion Physics Layer -->
     <canvas id="pvpCanvas"></canvas>
 
     <header>
@@ -223,7 +222,7 @@
         <p>A completely ad-free, high-performance vault hosting verified Minecraft optimization resources and custom client graphical overlays.</p>
     </section>
 
-   <main>
+   
     <main class="container">
     <div class="pack-grid" id="packGrid">
         <div style="background: var(--card-bg, #111827); padding: 24px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.05); text-align: center;">
@@ -264,3 +263,5 @@
         const ctx = canvas.getContext('2d');
 
         let pvpItems = [];
+        const mouse = { x: null, y: null, radius: 150 };
+
