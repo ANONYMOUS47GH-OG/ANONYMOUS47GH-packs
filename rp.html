@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANONYMOUSGH47's TEXTURE PACKS</title>
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <style>
+        :root {
+            --bg-deep: #050811;
+            --bg-surface: #0e1626;
+            --blue-glow: #38bdf8;
+            --blue-accent: #0284c7;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --danger: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Sleek Stealth Header */
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px 50px;
+            background: rgba(5, 8, 17, 0.75);
+            border-bottom: 1px solid rgba(56, 189, 248, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.6rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+        }
+
+        .logo span {
+            color: var(--blue-glow);
+        }
+
+        /* Engaging Premium Hero Screen */
+        .hero {
+            text-align: center;
+            padding: 100px 20px 60px 20px;
+            background: radial-gradient(circle at top, rgba(2, 132, 199, 0.15) 0%, rgba(5, 8, 17, 1) 60%);
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 900;
+            cursor: default;
+        }
+
+        /* Trigger Text Styling */
+        .trigger-text {
+            color: var(--blue-glow);
+            transition: text-shadow 0.3s;
+        }
+
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 1.15rem;
+            max-width: 580px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Core Catalog Display Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 20px 80px 20px;
+        }
+
+        .pack-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .pack-card {
+            background: var(--bg-surface);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .pack-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(56, 189, 248, 0.3);
+            box-shadow: 0 20px 30px -10px rgba(5, 8, 17, 0.7), 0 0 25px rgba(2, 132, 199, 0.15);
+        }
+
+        .pack-img {
+            width: 100%;
+            height: 210px;
+            background: #131e33;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(56, 189, 248, 0.1);
+        }
+
+        .pack-info {
+            padding: 25px;
+        }
+
+        .pack-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(2, 132, 199, 0.2);
+            color: var(--blue-glow);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            padding: 4px 12px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+            backdrop-filter: blur(4px);
+        }
+
+        .pack-title {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .pack-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 22px;
+            height: 48px;
+            overflow: hidden;
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2);
+        }
+
+        .download-btn:hover {
+            background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.25);
+        }
+
+        .delete-btn {
+            background: transparent;
+            color: var(--danger);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 15px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: none;
+            transition: all 0.2s;
+        }
+
+        .delete-btn:hover {
+            background: var(--danger);
+            color: white;
+        }
+
+        /* Secret Modal UI Overlays */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(3, 7, 18, 0.92);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(8px);
+        }
+
+        .modal-content {
+            background: var(--bg-surface);
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 480px;
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: color 0.2s;
+        }
+
+        .close-modal:hover { color: white; }
+
+        .form-group { margin-bottom: 22px; }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 14px;
+            background: var(--bg-deep);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            color: white;
+            border-radius: 10px;
+            outline: none;
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--blue-glow);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--blue-accent);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .submit-btn:hover { background: var(--blue-glow); }
+
+        .empty-state {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 80px 20px;
+            color: var(--text-secondary);
+            border: 2px dashed rgba(56, 189, 248, 0.05);
+            border-radius: 20px;
+        }
+
+        .empty-state i {
+            font-size: 3.5rem;
+            margin-bottom: 18px;
+            color: rgba(56, 189, 248, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">ANONYMOUSGH47</div>
+    </header>
+
+    <section class="hero">
+        <!-- Double click the span element below to access your admin login window -->
+        <h1>TEXTURE <span class="trigger-text" ondblclick="openAdminModal()">PACKS</span></h1>
+        <p>A completely ad-free, high-performance vault hosting verified Minecraft optimization resources and custom client graphical overlays.</p>
+    </section>
+
+    <main class="container">
+        <div class="pack-grid" id="packGrid"></div>
+    </main>
+
+    <!-- Invisible Lockbox Panel Interface -->
+    <div class="modal" id="adminModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeAdminModal()">&times;</span>
+            
+            <!-- Guard Interface -->
+            <div id="authSection" style="text-align: center;">
+                <h2 style="margin-bottom: 10px; font-weight: 700;">System Access</h2>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 25px;">Enter validation passkey to modify resource index.</p>
+                <div class="form-group">
+                    <input type="password" id="passkeyInput" placeholder="Passkey">
+                </div>
+                <button class="submit-btn" onclick="verifyAdmin()">Unlock</button>
+            </div>
+
+            <!-- Terminal Studio Upload Form -->
+            <div id="uploadSection" style="display: none;">
