@@ -223,11 +223,17 @@
             color: var(--accent-pink);
         }
 
-       .cards-grid {
+  .cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
     width: 100%;
+}
+
+@media (max-width: 900px) {
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
         .glass-card {
