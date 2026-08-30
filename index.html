@@ -145,7 +145,107 @@
             object-fit: cover;
             filter: drop-shadow(0 0 15px var(--accent-pink));
         }
+/* Dropdown Container */
+.mod-dropdown {
+  margin: 15px 0;
+  background: rgba(18, 18, 26, 0.7);
+  border: 1px solid rgba(138, 43, 226, 0.3);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  text-align: left;
+}
 
+.mod-dropdown[open] {
+  border-color: #a855f7;
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
+}
+
+/* Toggle Header (Clickable area) */
+.mod-dropdown-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  cursor: pointer;
+  user-select: none;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  list-style: none; /* Removes default browser arrow */
+  background: rgba(255, 255, 255, 0.03);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.mod-dropdown-toggle::-webkit-details-marker {
+  display: none; /* Safari fix */
+}
+
+.mod-dropdown-toggle:hover {
+  background: rgba(168, 85, 247, 0.15);
+  color: #38bdf8;
+}
+
+/* Animated Arrow */
+.arrow-icon {
+  font-size: 0.75rem;
+  color: #a855f7;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease;
+}
+
+.mod-dropdown[open] .arrow-icon {
+  transform: rotate(180deg);
+  color: #38bdf8;
+}
+
+/* Animated Content Body */
+.mod-list-content {
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  animation: slideDownFade 0.4s ease forwards;
+}
+
+/* Categories Text Styling */
+.mod-category h4 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #38bdf8;
+  margin: 0 0 6px 0;
+}
+
+.mod-category ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.mod-category li {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  padding: 3px 0;
+  line-height: 1.4;
+}
+
+.mod-category li strong {
+  color: #f1f5f9;
+}
+
+/* The Smooth Dropdown Animation */
+@keyframes slideDownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
         .hero h1 {
             font-family: 'Orbitron', sans-serif;
             font-size: clamp(2rem, 5vw, 3.4rem);
@@ -354,6 +454,8 @@
             color: var(--text-muted);
             font-size: 0.9rem;
             margin-top: 40px;
+  
+}
         }
     </style>
 </head>
@@ -423,7 +525,7 @@
                         <h3>NO PUMPKIN BLUR</h3>
                         <span class="badge">Visibilityi</span>
                     </div>
-                    <p class="card-desc"></p>
+                    <p class="card-desc">JUST TOO PURFECT IF FRIENDS PRANK.</p>
                     <div class="card-footer">
                         <span class="meta-info"><i class="fa-solid fa-hard-drive"></i> 22.8 MB</span>
                         <a href="No Pumpkin Blur.zip" class="btn-download"><i class="fa-solid fa-download"></i> Download</a>
@@ -443,6 +545,53 @@
                         <h3>MODPACK BY ANONYMOUS47GH</h3>
                         <span class="badge">Fabric / Optimized</span>
                     </div>
+      <details class="mod-dropdown">
+    <summary class="mod-dropdown-toggle">
+        <span>View Included Mods (<span class="mod-count">30+</span>)</span>
+        <span class="arrow-icon">▼</span>
+    </summary>
+    
+    <div class="mod-list-content">
+        <!-- Optimizations Section -->
+        <div class="mod-category">
+            <h4>⚡ Optimizations</h4>
+            <ul>
+                <li><strong>Sodium & Lithium:</strong> Massive FPS & game logic boosts</li>
+                <li><strong>FerriteCore & Krypton:</strong> Memory reducer & network optimizer</li>
+                <li><strong>EntityCulling & MoreCulling:</strong> Stops rendering unseen blocks/entities</li>
+                <li><strong>C2ME & ModernFix:</strong> Faster chunk generation & bug fixes</li>
+                <li><strong>ImmediatelyFast & Dynamic FPS:</strong> UI rendering & background performance</li>
+                <li><strong>BadOptimizations & Spark:</strong> Extra micro-stutter fixes & profiling</li>
+            </ul>
+        </div>
+
+        <!-- PvP Section -->
+        <div class="mod-category">
+            <h4>⚔️ PvP</h4>
+            <ul>
+                <li><strong>AnchorOptimizer & Hero's Anchor:</strong> Better respawn anchor handling</li>
+                <li><strong>ClientSideCrystals & FastCrystalSpin:</strong> Smoother crystal visuals</li>
+                <li><strong>Crystal Optimizer:</strong> Reduced latency for CPVP</li>
+                <li><strong>Combat Hitbox:</strong> Optimized combat mechanics</li>
+                <li><strong>ScrollRebind & CreamyKeys:</strong> Fast slot swapping & input tweaks</li>
+                <li><strong>TotemTweaks:</strong> Better totem pop visuals/handling</li>
+            </ul>
+        </div>
+
+        <!-- HUD & Utils Section -->
+        <div class="mod-category">
+            <h4>🖥️ HUD & Utils</h4>
+            <ul>
+                <li><strong>FastClient HUD & Uku's Armor HUD:</strong> Clean on-screen info</li>
+                <li><strong>StatusEffectTimer & PotionCounter:</strong> Track your buffs easily</li>
+                <li><strong>TotemCounter & Heart Indicator:</strong> Essential CPVP tracking</li>
+                <li><strong>AdvancedCrosshair:</strong> Custom combat crosshairs</li>
+                <li><strong>Gamma-Utils:</strong> Instant fullbright toggle</li>
+                <li><strong>ModMenu & FPSDisplay:</strong> Easy config access & frame tracking</li>
+            </ul>
+        </div>
+    </div>
+</details>
                     <div class="card-footer">
                         <span class="meta-info"><i class="fa-solid fa-file-zipper"></i> ZIP Archive</span>
                         <a href="https://github.com/ghostxxxxxxxxxx-i/ANONYMOUS47GH-packs/releases/download/v1.0.0/mods.zip" download class="btn-download"><i class="fa-solid fa-download"></i> Download</a>
